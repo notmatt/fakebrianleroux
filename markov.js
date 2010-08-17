@@ -51,7 +51,7 @@ var getNextWord = function(tokens, choice) {
  */
 var randomChoice = function(choiceList) {
 	if (choiceList.length < 1) {
-		return fallbackChoice();
+		return justStopTrying();
 	}
 	// adjustment to use same interface as simpleHeuristicChoice, collapse the list.
 	var words = choiceList.reduce(function (acc, x) { if (x.length > 0) return acc.concat(x); return acc; }, []);
@@ -64,6 +64,11 @@ var randomChoice = function(choiceList) {
  * Fallback choice to a random word from the index.
  */
 var fallbackChoice = function() { return index.getRandomWord(); }
+
+/**
+ * Fallback to just stopping the tweet; insert an '<END>'
+ */
+var justStopTrying = function() { return '<END>' }
 
 /**
  * Mild heuristic, prefers the largest (n-gram) key with more than one option.  Tries to strike

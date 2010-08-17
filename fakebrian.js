@@ -39,7 +39,7 @@ var complete = function(tokens) {
 	var tweet = renderTweet(tokens);
 	var mightBeOver = tokens[tokens.length-1] == tok.finalToken;
 	
-	if (tweet.length > 40 && mightBeOver) { return true }
+	if (mightBeOver) { return true }
 	
 	if (tweet.length > 120) { return true }
 }

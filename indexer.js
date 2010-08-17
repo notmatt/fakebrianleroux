@@ -75,8 +75,8 @@ var makeKeyFor = function(tokens) {
 // wrap tokenising methods together.
 var tokenize = function(tweet, callback) {
 	tok.whitespaceTokenizer(tweet, function(tokens) {
-		tok.punctuationProcessor(tokens, false, function(puncTokens) {
-			callback(puncTokens);
+		tok.normalize(tokens, false, function(normTokens) {
+			callback(normTokens);
 		})
 	})
 }

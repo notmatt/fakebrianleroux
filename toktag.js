@@ -15,14 +15,21 @@ exports.whitespaceTokenizer = function(text, callback) {
 /**
  * Processes tokens, getting rid of commas, periods, and the like.
  */
-exports.punctuationProcessor = function(tokens, keep, callback) {
-	callback(tokens.reduce(function(acc, x, i, arr) {
-		// [.,;:!?()] - only worried about final spots.
-		if (x.match(/[.,;'"!?]$/)) {
-			acc.push(x.substring(0, x.length-1));
-			if (keep) { acc.push(x.substring(x.length-1)); }
-		} else {
-			acc.push(x);
+exports.normalize = function(tokens, keep, callback) {
+	callback(tokens.reduce(function(acc, x) {
+		if (x == initialToken || x == finalToken) {
+			acc.push(x)
+			return acc;
+		}
+		
+		// strips leading and trailing punctuation, keeps leading-@ for usernames, lowercases.
+		// tries to keep interior punctuation, URL, and &-like things.  At least a little better than before.
+		var normalizer = /([.,?!\("]*)(@?[\w-'.&:\/\/]+\w)([.,?!"\)]*)/;
+		var normalized = x.match(normalizer)
+		if (normalized) {
+			if (keep && normalized[1]) { acc.push(normalized[1]) }
+			acc.push(normalized[2].toLowerCase());
+			if (keep && normalized[3]) { acc.push(normalized[3]) }
 		}
 		return acc;
 	}, []));
