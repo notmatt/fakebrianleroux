@@ -28,7 +28,7 @@ exports.normalize = function(tokens, keep, callback) {
 		var normalized = x.match(normalizer)
 		if (normalized) {
 			if (keep && normalized[1]) { acc.push(normalized[1]) }
-			acc.push(normalized[2].toLowerCase());
+			acc.push(normalized[2]);
 			if (keep && normalized[3]) { acc.push(normalized[3]) }
 		}
 		return acc;
