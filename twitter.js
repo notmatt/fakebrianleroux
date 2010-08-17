@@ -2,7 +2,7 @@ var http = require('http');
 
 // constructs the url to brian's tweets, optionally maxId, sinceId, count
 var brianUrl = function(sinceId, count, page) {
-	var brianUrl = "http://api.twitter.com/1/statuses/user_timeline.json?user_id=676363&trim_user=1";
+	var brianUrl = "http://api.twitter.com/1/statuses/user_timeline.json?screen_name=notmatt&trim_user=1";
 	
 	var extraParams = '';
 	extraParams += sinceId ? "&since_id=" + sinceId : '';
