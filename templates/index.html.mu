@@ -1,5 +1,5 @@
 <html>
-<head><title>Fake Brian Leroux</title>
+<head><title>Fake Matt Smillie</title>
 <style>
 body { 
 	color: 0a0a0a;
@@ -32,7 +32,7 @@ body {
 		{{foobar}}
 	</div>
 	<div class="content">
-		A very simple markov-chain text generator based on an index of <a href="http://twitter.com/brianleroux">@brianleroux</a>'s latest few thousand tweets.
+		A very simple markov-chain text generator based on an index of <a href="http://twitter.com/notmatt">@notmatt</a>'s latest few thousand tweets.
 	</div>
 </body>
 
