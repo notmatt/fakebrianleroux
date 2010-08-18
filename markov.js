@@ -1,6 +1,53 @@
 // simple markov chain.
-
 var index = require('./indexer');
+
+// two aspects here:
+// chain - encapsulation of the current state
+// generator - create the chain
+
+// generator needs:
+// an index, interface should be the current chain (or derivable from this)
+//   - index should provide a getKeyFromState(state)
+//   - index should provide a get(key), return a list of possible next words
+// a quality function
+//   - to choose from the possible next words
+//   - should include termination?
+
+var MarkovGenerator = exports.MarkovGenerator = function(index) {
+	this.index = index;
+}
+
+MarkovGenerator.prototype = {
+	startChain : function() {
+		return new MarkovChain([]);
+	},
+	
+	get : function(key, callback) {
+		callback(index.get(key));
+	}
+	
+	// default choice function, assumes a bag of tokens, chooses randomly.
+	chooseFrom : function(tokens) {
+		return tokens[Math.floor(Math.random * tokens.length)]
+	},
+	
+	generateNext : function(chain) {
+		return chooseFrom(get(chain));
+	}
+}
+
+var MarkovChain = exports.MarkovChain = function(initialState) {
+	this.state = initialState || [];
+}
+
+MarkovChain.prototype = {
+	add : function(token) {
+		state.push(token);
+	},
+}
+
+// chain needs
+//   - to maintain its quality metric for each subsequent state?
 
 /**
  * Generates a markov chain, takes a choice() function to select the next word,
