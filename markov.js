@@ -24,7 +24,7 @@ MarkovGenerator.prototype = {
 	
 	get : function(key, callback) {
 		callback(index.get(key));
-	}
+	},
 	
 	// default choice function, assumes a bag of tokens, chooses randomly.
 	chooseFrom : function(tokens) {
