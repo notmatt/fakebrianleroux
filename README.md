@@ -2,9 +2,11 @@
 
 A preliminary markov-chain generator from an index built on [@brianleroux's](http://twitter.com/brianleroux) last few thousand tweets.
 
+Don't forget to update submodules to get Mu.
+
 `node fakebrian.js` will dump you to a REPL where fb.genTweet() will show you what's up.
 
-`node app.js` will launch a web app on :3000, though it had dependencies on Express and Mu that are not yet as tidy as they should be.
+`node app.js` will launch a web app on :3000.
 
 Features:
 
