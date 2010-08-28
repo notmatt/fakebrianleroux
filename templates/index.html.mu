@@ -2,7 +2,7 @@
 <head><title>Fake Brian Leroux</title>
 <style>
 body { 
-	color: 0a0a0a;
+	color: #0a0a0a;
 	background-color: #f0f0f0; 
 }
 .content, .brian {
@@ -25,6 +25,7 @@ body {
 }
 </style>	
 </head>
+<body>
 	<div class="brian">
 		{{^foobar}}
 		<b>Not working.</b>
