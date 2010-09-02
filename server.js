@@ -35,8 +35,9 @@ var init = function() {
 		res.writeHead(200, {'Content-Type' : 'text/html'});
 		display(indexView, function(output) { res.end(output) });
 	})
-	server.listen(parseInt(process.env["NODEPORT"]) || 80);
-	console.log("Started server.")
+	var port = parseInt(process.env["NODEPORT"]) || 80;
+	server.listen(port);
+	console.log("Started server on port ", port);
 }
 
 init();

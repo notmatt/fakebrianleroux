@@ -30,7 +30,7 @@ exports.fetchIndexSince = function(id, fetchPage, callback) {
 	var page = 1;
 	fetchPage(page, function maybeNextPage(results) {
 		// TODO: implement exponential backoff for when twitter complains? or just a delay?
-		if (results.length > 0 && page < 2) {
+		if (results.length > 0 && page < 16) {
 			add(results);
 			page += 1;
 			fetchPage(page, maybeNextPage);
