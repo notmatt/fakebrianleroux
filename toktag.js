@@ -24,7 +24,7 @@ exports.normalize = function(tokens, keep, callback) {
 		
 		// strips leading and trailing punctuation, keeps leading-@ for usernames, lowercases.
 		// tries to keep interior punctuation, URL, and &-like things.  At least a little better than before.
-		var normalizer = /([.,?!\("]*)(@?[\w-'.&:\/\/]+\w)([.,?!"\)]*)/;
+		var normalizer = /([.,?!\("]*)([@#]?[\w-'.&:\/\/]+\w)([.,?!"\)]*)/;
 		var normalized = x.match(normalizer)
 		if (normalized) {
 			if (keep && normalized[1]) { acc.push(normalized[1]) }
