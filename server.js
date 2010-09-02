@@ -31,10 +31,11 @@ var init = function() {
 		console.log("done - starting server");
 		indexView.context.foobar = function() { return fakeBrian.genTweet(); }
 	});
-	http.createServer(function(req, res) {
+	var server = http.createServer(function(req, res) {
 		res.writeHead(200, {'Content-Type' : 'text/html'});
 		display(indexView, function(output) { res.end(output) });
-	}).listen(process.env.PORT || 3000);
+	})
+	server.listen(parseInt(process.env["NODEPORT"]) || 80);
 	console.log("Started server.")
 }
 

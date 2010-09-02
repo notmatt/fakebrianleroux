@@ -34,7 +34,7 @@ body {
 	<div class="content">
 		<p>A very simple markov-chain text generator based on an index of <a href="http://twitter.com/brianleroux">@brianleroux</a>'s latest few thousand tweets.</p>
 		
-		<p><a href="http://github.com/notmatt/fakebrianleroux">Fork it!</a></p>
+		<p><a href="http://github.com/notmatt/fakebrianleroux">github: notmatt/fakebrianleroux</a></p>
 	</div>
 </body>
 
