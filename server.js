@@ -35,6 +35,7 @@ var init = function() {
 		res.writeHead(200, {'Content-Type' : 'text/html'});
 		display(indexView, function(output) { res.end(output) });
 	}).listen(process.env.PORT || 3000);
+	console.log("Started server.")
 }
 
 init();
