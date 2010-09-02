@@ -17,6 +17,15 @@ exports.genTweet = function() {
 	return tweet;
 }
 
+exports.reply = function(words) {
+	var tweet;
+	var startWith = [tok.initialToken].concat(Array.prototype.slice.call(arguments));
+	markov.generate(startWith, complete, function(tokens) {
+		tweet = renderTweet(tokens);
+	});
+	return tweet;
+}
+
 /**
  * Render tokens to a tweet-like string.
  */
