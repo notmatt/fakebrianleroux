@@ -33,7 +33,9 @@ body {
 		{{foobar}}
 	</div>
 	<div class="content">
-		A very simple markov-chain text generator based on an index of <a href="http://twitter.com/brianleroux">@brianleroux</a>'s latest few thousand tweets.
+		<p>A very simple markov-chain text generator based on an index of <a href="http://twitter.com/brianleroux">@brianleroux</a>'s latest few thousand tweets.</p>
+		
+		<p><a href="http://github.com/notmatt/fakebrianleroux">github: notmatt/fakebrianleroux</a></p>
 	</div>
 </body>
 

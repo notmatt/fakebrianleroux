@@ -2,7 +2,7 @@
 require.paths.unshift('./lib/Mu/lib')
 
 var http = require('http')
-,   fakeBrian = require('./fakeBrian')
+,   fakeBrian = require('./fakebrian')
 ,   Mu = require('mu')
 
 // wrap the Mu rendering. Seems like there should be a simpler way.
@@ -20,7 +20,7 @@ var display = function(view, callback) {
 var indexView = {
 	template: "templates/index.html",
 	context: {
-		foobar : function() { return fakeBrian.genTweet(); }
+		foobar : function() { return "indexing!"}
 	}
 }
 
@@ -29,12 +29,15 @@ var init = function() {
 	console.log("initializing");
 	fakeBrian.init(function() {
 		console.log("done - starting server");
-		http.createServer(function(req, res) {
-			res.writeHead(200, {'Content-Type' : 'text/html'});
-			display(indexView, function(output) { res.end(output) });
-		}).listen(3000, "127.0.0.1");
-		console.log("Listening on http://127.0.0.1:3000");
+		indexView.context.foobar = function() { return fakeBrian.genTweet(); }
 	});
+	var server = http.createServer(function(req, res) {
+		res.writeHead(200, {'Content-Type' : 'text/html'});
+		display(indexView, function(output) { res.end(output) });
+	})
+	var port = parseInt(process.env["NODEPORT"]) || 80;
+	server.listen(port);
+	console.log("Started server on port ", port);
 }
 
 init();
