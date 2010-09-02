@@ -2,7 +2,7 @@
 require.paths.unshift('./lib/Mu/lib')
 
 var http = require('http')
-,   fakeBrian = require('./fakeBrian')
+,   fakeBrian = require('./fakebrian')
 ,   Mu = require('mu')
 
 // wrap the Mu rendering. Seems like there should be a simpler way.
@@ -32,7 +32,7 @@ var init = function() {
 		http.createServer(function(req, res) {
 			res.writeHead(200, {'Content-Type' : 'text/html'});
 			display(indexView, function(output) { res.end(output) });
-		}).listen(process.env.PORT || 3000, "127.0.0.1");
+		}).listen(process.env.PORT || 3000);
 	});
 }
 
