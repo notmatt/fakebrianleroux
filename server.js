@@ -20,7 +20,7 @@ var display = function(view, callback) {
 var indexView = {
 	template: "templates/index.html",
 	context: {
-		foobar : function() { return fakeBrian.genTweet(); }
+		foobar : function() { return "indexing!"}
 	}
 }
 
@@ -29,11 +29,12 @@ var init = function() {
 	console.log("initializing");
 	fakeBrian.init(function() {
 		console.log("done - starting server");
-		http.createServer(function(req, res) {
-			res.writeHead(200, {'Content-Type' : 'text/html'});
-			display(indexView, function(output) { res.end(output) });
-		}).listen(process.env.PORT || 3000);
+		indexView.context.foobar = function() { return fakeBrian.genTweet(); }
 	});
+	http.createServer(function(req, res) {
+		res.writeHead(200, {'Content-Type' : 'text/html'});
+		display(indexView, function(output) { res.end(output) });
+	}).listen(process.env.PORT || 3000);
 }
 
 init();
