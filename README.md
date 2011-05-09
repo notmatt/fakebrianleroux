@@ -2,7 +2,6 @@
 
 A preliminary markov-chain generator from an index built on [@brianleroux's](http://twitter.com/brianleroux) last few thousand tweets.
 
-Don't forget to update submodules to get Mu.
 
 `node fakebrian.js` will dump you to a REPL where fb.genTweet() will show you what's up.
 
@@ -14,7 +13,6 @@ Features:
 
 Doesn't feature:
 
- - Persistance
  - Configurability (e.g., other users)
  - Posting to @fakebrianleroux
  - feedback/reinforcement (Brian would/wouldn't say that!)

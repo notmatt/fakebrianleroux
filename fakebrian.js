@@ -1,8 +1,8 @@
 var markov = require('./markov')
 ,   indexer = require('./indexer')
-,	twitter = require('./twitter')
+,	  twitter = require('./twitter')
 ,   tok = require('./toktag')
-,	repl = require('repl')
+,	  repl = require('repl')
 
 var ready = false;
 
@@ -45,6 +45,7 @@ var renderTweet = function(tokens) {
  * Completeness function for tweets. 50-char minimum, then will accept <END>. Otherwise, 120-char and up.
  */
 var complete = function(tokens) {
+  
 	var tweet = renderTweet(tokens);
 	var mightBeOver = tokens[tokens.length-1] == tok.finalToken;
 	
@@ -68,7 +69,9 @@ exports.init = function(callback) {
 // generate via fb.genTweet()
 if (process.argv[1] == __filename) {
 	console.log("Indexing.")
-	indexer.fetchWholeIndex(twitter.fetchPage, function() { 
+  indexer.fetchWholeIndex(twitter.fetchPage, function() { 
+  // indexer.fetchWholeIndex(twitter.fetchMockPage, function() {    
+	  
 		repl.start("fb> ").context.fb = exports;
 		console.log("indexed!");
 	});

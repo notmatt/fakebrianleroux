@@ -1,9 +1,7 @@
-// TODO: really need express here? Don't think so.
-require.paths.unshift('./lib/Mu/lib')
-
 var http = require('http')
+,   express = require('express')
 ,   fakeBrian = require('./fakebrian')
-,   Mu = require('mu')
+
 
 // wrap the Mu rendering. Seems like there should be a simpler way.
 var display = function(view, callback) {
@@ -26,18 +24,23 @@ var indexView = {
 
 var init = function() {
 	// initialize the index, when finished, kick off the server.
+  var genTweet = null;
+  
 	console.log("initializing");
-	fakeBrian.init(function() {
-		console.log("done - starting server");
-		indexView.context.foobar = function() { return fakeBrian.genTweet(); }
-	});
-	var server = http.createServer(function(req, res) {
-		res.writeHead(200, {'Content-Type' : 'text/html'});
-		display(indexView, function(output) { res.end(output) });
-	})
-	var port = parseInt(process.env["NODEPORT"]) || 80;
-	server.listen(port);
-	console.log("Started server on port ", port);
+	
+  fakeBrian.init(function() {
+   console.log("done - starting server");
+   genTweet = fakeBrian.genTweet();
+  });
+	
+	var app = express.createServer();
+
+  app.get('/', function(req, res){
+    // display(indexView, function(output) { res.end(output) });
+    res.render('index.ejs', {layout:false,foobar:genTweet});
+  });
+  	
+	app.listen(process.env.PORT || 1337);
 }
 
 init();

@@ -1,0 +1,9 @@
+{
+  "name":"fakebrianleroux",
+  "version":"0.0.1",
+  "dependencies":{
+    "express":"2.2.2",
+    "ejs":"",
+    "dirty":"0.9.1"
+  }
+}
