@@ -23,7 +23,8 @@ MarkovGenerator.prototype = {
 	},
 	
 	get : function(key, callback) {
-		callback(index.get(key));
+	  var k = index.get(key);
+		callback(k);
 	},
 	
 	// default choice function, assumes a bag of tokens, chooses randomly.
@@ -204,7 +205,7 @@ if (process.argv[1] == __filename) {
 		} catch(err) {
 			errors = err;
 		} finally {
-			console.log(test.name + (!errors ? " passed." : " FAILED!!!1! >>> " + errors));
+			console.log(test.name + (!errors ? " passed." : " FAILED!!!! >>> " + errors));
 		}
 	});
 }
