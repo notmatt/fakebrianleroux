@@ -9,7 +9,7 @@ var http = require('http')
 var display = function(view, callback) {
 	Mu.render(view.template, view.context, {}, function(err, output) {
 		if(err) { throw err }
-		
+
 		var buffer = '';
 		output.on('data', function(chunk) { buffer += chunk })
 			  .on('end', function() { callback(buffer) });
@@ -35,7 +35,7 @@ var init = function() {
 		res.writeHead(200, {'Content-Type' : 'text/html'});
 		display(indexView, function(output) { res.end(output) });
 	})
-	var port = parseInt(process.env["NODEPORT"]) || 80;
+	var port = parseInt(process.env["NODEPORT"]) || 4040;
 	server.listen(port);
 	console.log("Started server on port ", port);
 }

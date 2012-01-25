@@ -2,13 +2,14 @@ var http = require('http');
 
 // constructs the url to brian's tweets, optionally maxId, sinceId, count
 var brianUrl = function(sinceId, count, page) {
-	var brianUrl = "http://api.twitter.com/1/statuses/user_timeline.json?user_id=676363&trim_user=1";
-	
+	// var brianUrl = "http://api.twitter.com/1/statuses/user_timeline.json?user_id=676363&trim_user=1";
+	var brianUrl = "http://api.twitter.com/1/statuses/user_timeline.json?screen_name=sogrady&trim_user=1";
+
 	var extraParams = '';
 	extraParams += sinceId ? "&since_id=" + sinceId : '';
 	extraParams += count ? "&count=" + count : '';
 	extraParams += page ? "&page=" + page : '';
-	
+
 	return brianUrl + extraParams;
 }
 
@@ -18,7 +19,7 @@ var brianUrl = function(sinceId, count, page) {
 var fetchTweets = function(sinceId, count, page, callback) {
 	var url = brianUrl(sinceId, count, page);
 	var request = http.createClient(80, "api.twitter.com").request("GET", url, {"host":"api.twitter.com"});
-	
+
 	request.on('response', function(response) {
 		var buffer = '';
 		response.on('data', function(chunk) { buffer += chunk; })
@@ -42,7 +43,7 @@ var fetchTweets = function(sinceId, count, page, callback) {
 			}
 		});
 	});
-	request.end(); 
+	request.end();
 }
 
 // mock data for dev/test. Provides 9 pages.
@@ -74,7 +75,7 @@ if (process.argv[1] == __filename) {
 			return null;
 		}
 	});
-	
+
 	tests.push({
 		name : 'url test',
 		test : function() {
@@ -88,7 +89,7 @@ if (process.argv[1] == __filename) {
 			};
 		}
 	})
-	
+
 	var repl = require("repl");
 
 	// TODO: when this one throws, I can't get it to be caught. Can't figure out why not.
@@ -106,7 +107,7 @@ if (process.argv[1] == __filename) {
 
 
 	// execute tests.
-	tests.map(function(test, i, arr) { 
+	tests.map(function(test, i, arr) {
 		var errors;
 		try {
 			test.test();

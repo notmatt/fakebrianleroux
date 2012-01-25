@@ -20,7 +20,7 @@ exports.fetchWholeIndex = function(fetchPage, callback) {
 
 /**
  * Pulls and indexes the stream since a given id.
- */ 
+ */
 exports.fetchIndexSince = function(id, fetchPage, callback) {
 	// pages of 200.
 	// continue until:
@@ -30,7 +30,7 @@ exports.fetchIndexSince = function(id, fetchPage, callback) {
 	var page = 1;
 	fetchPage(page, function maybeNextPage(results) {
 		// TODO: implement exponential backoff for when twitter complains? or just a delay?
-		if (results.length > 0 && page < 16) {
+		if (results.length > 0 && page < 6) {
 			add(results);
 			page += 1;
 			fetchPage(page, maybeNextPage);
@@ -45,7 +45,7 @@ exports.fetchIndexSince = function(id, fetchPage, callback) {
  */
 exports.get = function(tokens) {
 	var n = tokens.length; // size of key.
-	var key = makeKeyFor(tokens);	
+	var key = makeKeyFor(tokens);
 	if (index.ngrams[n][key]) {
 		return index.ngrams[n][key];
 	}
@@ -90,9 +90,9 @@ var addNgrams = function(ngrams) {
 	if (ngrams.length == 0) {
 		return;
 	} else {
-		var n = ngrams[0].length - 1; // key length, not ngram length 
+		var n = ngrams[0].length - 1; // key length, not ngram length
 		if (!index.ngrams[n]) { index.ngrams[n] = {} }
-		
+
 		ngrams.map(function(ngram) {
 			var value = ngram.pop();               // ["once", "upon", "a"] : ["time"]
 			var key = makeKeyFor(ngram);           // "once_upon_a" : ["time"]
@@ -101,7 +101,7 @@ var addNgrams = function(ngrams) {
 			} else {
 				index.ngrams[n][key] = [value];
 			}
-		})		
+		})
 	}
 }
 
@@ -110,8 +110,8 @@ var add = function(tweets) {
 	// don't worry about the actual tweets for now.
 	// index.tweets = index.tweets.concat(tweets);
 	index.tweetCount += tweets.length;
-	
-	tweets.map(function(tweet) {		
+
+	tweets.map(function(tweet) {
 		tokenize(tweet.text, function(tokens) {
 			for (n=2; n <= 4; n++) {
 				tok.ngramify(tokens, n, function(ngrams) { addNgrams(ngrams) })
@@ -121,13 +121,13 @@ var add = function(tweets) {
 }
 
 // TEST(S)
-if (process.argv[1] == __filename) { 
-	
+if (process.argv[1] == __filename) {
+
 	var repl = require('repl');
 	console.log("Running tests...");
-	
+
 	var tests = [];
-	
+
 	tests.push({
 		name : "Full index test",
 		test : function() {
@@ -142,7 +142,7 @@ if (process.argv[1] == __filename) {
 			// repl.start("indexed - node> ").context.index = index;
 		}
 	});
-	
+
 	tests.push({
 		name : "get test",
 		test : function() {
@@ -151,9 +151,9 @@ if (process.argv[1] == __filename) {
 			if (expected[0] != actual[0] || expected[1] != actual[1]) {
 				throw "Expected ['give', 'of'], but got: ['" + actual[0] + "', '" + actual[1] + "']"
 			}
-		}		
+		}
 	})
-	
+
 	// execute tests.
 	tests.map(function(test, i, arr) {
 		var errors;
